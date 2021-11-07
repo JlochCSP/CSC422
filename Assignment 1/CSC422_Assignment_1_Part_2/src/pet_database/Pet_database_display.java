@@ -29,7 +29,7 @@ public class Pet_database_display {
 					System.out.println("| ID | NAME      | AGE |");
 					System.out.print("+----------------------+");
 					for(int i = 0; i < petDB.size(); i++) {
-						System.out.printf("\n|%3s | %-10s|%4s |",  i+1, petDB.get(i).getName(), petDB.get(i).getAge());
+						System.out.printf("\n|%3s | %-10s|%4s |",  i, petDB.get(i).getName(), petDB.get(i).getAge());
 					}
 					System.out.println("\n+----------------------+");
 					System.out.println(petDB.size() + " rows in set.");
@@ -55,9 +55,36 @@ public class Pet_database_display {
 					
 					break;
 				case 5:
-					
+					System.out.print("Enter a name to search: ");
+					String name = s.next();
+					int rows = 0;
+					System.out.println("+----------------------+");
+					System.out.println("| ID | NAME      | AGE |");
+					System.out.print("+----------------------+");
+					for(int i = 0; i < petDB.size(); i++) {
+						if(petDB.get(i).getName().equals(name)) {
+							System.out.printf("\n|%3s | %-10s|%4s |",  i, petDB.get(i).getName(), petDB.get(i).getAge());
+							rows++;
+						}
+					}
+					System.out.println("\n+----------------------+");
+					System.out.println(rows + " rows in set.");
 					break;
 				case 6:
+					System.out.print("Enter a name to search: ");
+					int age = s.nextInt();
+					int rows1 = 0;
+					System.out.println("+----------------------+");
+					System.out.println("| ID | NAME      | AGE |");
+					System.out.print("+----------------------+");
+					for(int i = 0; i < petDB.size(); i++) {
+						if(petDB.get(i).getAge() == age) {
+							System.out.printf("\n|%3s | %-10s|%4s |",  i, petDB.get(i).getName(), petDB.get(i).getAge());
+							rows1++;
+						}
+					}
+					System.out.println("\n+----------------------+");
+					System.out.println(rows1 + " rows in set.");
 					
 					break;
 				case 7:
