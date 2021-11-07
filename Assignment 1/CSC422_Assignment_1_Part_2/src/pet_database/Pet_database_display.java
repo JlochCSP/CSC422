@@ -49,10 +49,36 @@ public class Pet_database_display {
 					}
 					break;
 				case 3:
-					
+					System.out.println("+----------------------+");
+					System.out.println("| ID | NAME      | AGE |");
+					System.out.print("+----------------------+");
+					for(int i = 0; i < petDB.size(); i++) {
+						System.out.printf("\n|%3s | %-10s|%4s |",  i, petDB.get(i).getName(), petDB.get(i).getAge());
+					}
+					System.out.println("\n+----------------------+");
+					System.out.println(petDB.size() + " rows in set.");
+					System.out.print("Enter the pet ID you want to update: ");
+					int idUpdate = s.nextInt();
+					System.out.print("Enter new name and new age ");
+					String newName = s.next();
+					int newAge = s.nextInt();
+					System.out.println(petDB.get(idUpdate).getName() + " " + petDB.get(idUpdate).getAge() + " changed to " + newName + " " + newAge);
+					petDB.get(idUpdate).setName(newName);
+					petDB.get(idUpdate).setAge(newAge);
 					break;
 				case 4:
-					
+					System.out.println("+----------------------+");
+					System.out.println("| ID | NAME      | AGE |");
+					System.out.print("+----------------------+");
+					for(int i = 0; i < petDB.size(); i++) {
+						System.out.printf("\n|%3s | %-10s|%4s |",  i, petDB.get(i).getName(), petDB.get(i).getAge());
+					}
+					System.out.println("\n+----------------------+");
+					System.out.println(petDB.size() + " rows in set.");
+					System.out.print("Enter the pet ID to remove: ");
+					int idRemove = s.nextInt();
+					System.out.println(petDB.get(idRemove).getName() + " " + petDB.get(idRemove).getAge() + " is removed.");
+					petDB.remove(idRemove);
 					break;
 				case 5:
 					System.out.print("Enter a name to search: ");
@@ -62,7 +88,7 @@ public class Pet_database_display {
 					System.out.println("| ID | NAME      | AGE |");
 					System.out.print("+----------------------+");
 					for(int i = 0; i < petDB.size(); i++) {
-						if(petDB.get(i).getName().equals(name)) {
+						if(petDB.get(i).getName().equalsIgnoreCase(name)) {
 							System.out.printf("\n|%3s | %-10s|%4s |",  i, petDB.get(i).getName(), petDB.get(i).getAge());
 							rows++;
 						}
