@@ -2,6 +2,8 @@ package pet_database;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -55,7 +57,7 @@ public class Pet_database_display {
 						System.out.print("add pet (name, age): ");
 						String name = s.next();
 						int age = s.nextInt();
-						if(name.equals("done")) {
+						if(name.equalsIgnoreCase("done")) {
 							exitAdd = true;
 						} else {
 							Pet tempPet = new Pet(name, age);
@@ -132,6 +134,15 @@ public class Pet_database_display {
 					break;
 					*/
 				case 4:
+				try {
+					FileWriter petFileWriter = new FileWriter(petDBFile);
+					for(int i = 0; i < petDB.size(); i++) {
+						petFileWriter.write(petDB.get(i).getName() + " " + petDB.get(i).getAge() + "\n");
+					}
+					petFileWriter.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 					System.out.println("Goodbye!");
 					exit = true;
 					break;
