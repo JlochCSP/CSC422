@@ -39,6 +39,7 @@ public class Pet_database_display {
 			System.out.println("4) Exit program");
 			System.out.print("Your choice: ");
 			int userChoice = s.nextInt();
+			System.out.println();
 			
 			switch(userChoice) {
 				case 1:
@@ -50,20 +51,35 @@ public class Pet_database_display {
 					}
 					System.out.println("\n+----------------------+");
 					System.out.println(petDB.size() + " rows in set.");
+					System.out.println();
 					break;
 				case 2:
 					boolean exitAdd = false;
+					s.nextLine();
+					int petCount = 0;
 					while(exitAdd == false) {
 						System.out.print("add pet (name, age): ");
-						String name = s.next();
-						int age = s.nextInt();
-						if(name.equalsIgnoreCase("done")) {
-							exitAdd = true;
-						} else {
-							Pet tempPet = new Pet(name, age);
-							petDB.add(tempPet);
+						String newPetLine = s.nextLine();
+						if(newPetLine.equalsIgnoreCase("done")) {
+							System.out.println();
+							break;
+						}
+						String[] tempNewPetData = newPetLine.split(" ");
+						if(tempNewPetData.length != 2) {
+							System.out.println("Error: " + newPetLine + " is not a valid input.");
+						} else if(Integer.parseInt(tempNewPetData[1]) > 20 || Integer.parseInt(tempNewPetData[1]) < 1) {
+							System.out.println("Error: " + Integer.parseInt(tempNewPetData[1]) + " is not a valid age.");
+						} else if(petDB.size() >= 5) {
+							System.out.println("Error: Database is full.");
+							System.out.println();
+							break;
+						}  else {
+							petDB.add(new Pet(tempNewPetData[0], Integer.parseInt(tempNewPetData[1])));
+							petCount++;
 						}
 					}
+					System.out.println(petCount + " pets added.");
+					System.out.println();
 					break;
 				/*case 3:
 					System.out.println("+----------------------+");
@@ -95,8 +111,13 @@ public class Pet_database_display {
 					System.out.println(petDB.size() + " rows in set.");
 					System.out.print("Enter the pet ID to remove: ");
 					int idRemove = s.nextInt();
-					System.out.println(petDB.get(idRemove).getName() + " " + petDB.get(idRemove).getAge() + " is removed.");
-					petDB.remove(idRemove);
+					if(idRemove < petDB.size() && idRemove >= 0) {
+						System.out.println(petDB.get(idRemove).getName() + " " + petDB.get(idRemove).getAge() + " is removed.");
+						petDB.remove(idRemove);
+					} else {
+						System.out.println("Error: ID " + idRemove + " does not exist.");
+					}
+					System.out.println();
 					break;
 				/*case 5:
 					System.out.print("Enter a name to search: ");
